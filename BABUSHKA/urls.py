@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from BABUSHKA import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.start , view = "start")
+    path('', views.start , name = 'start')
 ]

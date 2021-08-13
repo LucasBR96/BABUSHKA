@@ -3,7 +3,7 @@ from django.db.models.fields import CharField
 from paises.models import Pais
 
 # Create your models here.
-class Receita( models ):
+class Receita( models.Model ):
 
     '''
     Cada receita terá duas formas: Card e Pagina

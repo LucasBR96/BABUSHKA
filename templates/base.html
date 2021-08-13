@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href= "static/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href= "static/css/base.css">
+        <link rel="stylesheet" type="text/css" href= "static/css/jquery-ui.min.css">
+        <title>{% block titulo %}Babushka{% endblock %}</title>
+<!--         <style>
+            {% block estilo %}
+    
+            {% endblock %}
+        </style> -->
+    </head>
+    <body>
+
+        <!-- cabeçalho -->
+
+        <div class = "container  text-danger bg-white">
+
+            <!-- logo aqui -->
+            <div class = "row d-flex justify-content-center align-items-center" >
+                <h2 class = "m-0" > Babushka </h5>
+            </div>
+
+            <div class = "row d-flex justify-content-center align-items-center" >
+                <h5 class = "m-0" > Culinária do leste Europeu </h5>
+            </div>
+
+            <!-- opcões -->
+            <div class = "row my-1 text-danger d-flex justify-content-center align-items-center">
+                
+                <div class = "col-4 d-flex justify-content-center" >
+                    <a style= "color: rgb(218, 41, 28); font-size: 16px" href = "#">
+                        Receitas
+                    </a>
+                </div>
+
+                <div class = "col-4 d-flex justify-content-center" >
+                    <a style= "color: rgb(218, 41, 28); font-size: 16px" href = "#">
+                        Restaurantes
+                    </a>
+                </div>
+                
+                <div class = "col-4 d-flex justify-content-center" >
+                    <a style= "color: rgb(218, 41, 28); font-size: 16px" href = "#">
+                        Tours
+                    </a>
+                </div>
+
+            </div>
+            
+            <!-- barra separadora-->
+            <div class = "mb-3" style = "padding: 3px ; background-color: rgb(0, 50, 160)"></div>
+        </div>
+
+        <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+        <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+        <script src="{% static 'js/jquery.mask.js' %}"></script>
+        <script src="{% static 'js/popper.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+<!--         <script>
+            $(document).ready(function(){
+    
+                {% block domready %};
+    
+                {% endblock %};
+            });
+        </script> -->
+    </body>
+</html>

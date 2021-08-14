@@ -15,3 +15,6 @@ class Pais( models.Model ):
 
         db_table = 'pais'
         ordering = ('nome',)
+    
+    def __str__(self):
+        return self.nome

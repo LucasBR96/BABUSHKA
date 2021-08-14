@@ -1,3 +1,14 @@
+body{
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+}
+
+div#center{
+   flex: 1;
+   min-width: 100vh; 
+}
+
 .barra {
     overflow-y: scroll;
 }

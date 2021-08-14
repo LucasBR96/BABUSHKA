@@ -31,3 +31,11 @@ class Receita( models.Model ):
     carr = CharField( max_length = 100 , default = '' )
     igrd = CharField( max_length = 100 , default = '' )
     istr = CharField( max_length = 100 , default = '' )
+
+    class Meta:
+
+        db_table = "receita"
+        ordering = ('nome',)
+    
+    def __str__( self ):
+        return self.nome

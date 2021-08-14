@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+
+{% block conteudo %}
+    
+    <div class = "row" style = "width: 100%" >
+        <div class= "col-3 text-danger mt-3 pl-4 pr-0" id = "check-b" >
+            
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                Todos
+                </label>
+            </div>
+
+            {% for pais in filtro %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="{{pais.nome}}">
+                <label class="form-check-label" for="{{pais.nome}}">
+                {{pais.nome}}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+        <div class = "col-8"></div>
+    </div>
+    
+{% endblock %}

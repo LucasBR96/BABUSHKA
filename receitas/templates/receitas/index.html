@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
-{% load static %} 
+{% load static %}
+
 
 {% block conteudo %}
     
-    <div class = "row" style = "width: 100%" >
+    <div class = "row mb-2" style = "width: 100%" >
 
         <div class= "col-3 text-danger mt-3 pl-4 pr-0" id = "check-b" >
             
@@ -26,13 +27,32 @@
         </div>
 
         <div class = "col-8">
-            {% for receita in rec %}
-            <div class = "row">
-                <div class = "card">
 
+            {% for receita in rec %}
+            <div class = "row my-2">
+                <div class = "card text-center border-primary" >
+                    <div class = "card-header text-danger" style = "background-color: rgb( 255 , 255 , 255 )">
+                        <h4>{{receita.nome}}</h4>
+                        <h5>{{receita.culinaria.nome}}</h5>
+
+                    </div>
+                    <div class = "card-body">
+                        <img src = "{%static 'images/receitas/' %}{{receita.thumb}}"
+                        style = "width: 520px">
+                        <p class = "text-justify-center mt-3">
+                            {{receita.desc}}
+                        </p>
+                    </div>
+                    <div class = "card-footer" style = "background-color: rgb( 255 , 255 , 255 )" >
+                        <button type = "button" 
+                        class = "btn"
+                        style = "color :rgb(0, 50, 160) ; border-color: rgb(0, 50, 160)">
+                            confira </button>
+                    </div>
                 </div>
             </div>
             {% endfor %}
+
         </div>
     </div>
     

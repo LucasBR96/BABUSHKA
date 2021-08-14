@@ -15,7 +15,7 @@ def set_cards():
 
         nome = x.nome
         culinaria = x.culinaria
-        thumb = 'imgs/' + x.thumb
+        thumb = x.thumb
 
         s = 'descpts/' + x.desc
         with open( s , 'r' ) as f:

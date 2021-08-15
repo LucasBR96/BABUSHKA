@@ -19,6 +19,6 @@ from BABUSHKA import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.start , name = 'start'),
+    path('', include('receitas.urls')),
     path('receitas/', include('receitas.urls'))
 ]

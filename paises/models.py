@@ -1,4 +1,6 @@
 from django.db import models
+from django import forms
+
 # Create your models here.
 class Pais( models.Model ):
 
@@ -18,3 +20,16 @@ class Pais( models.Model ):
     
     def __str__(self):
         return self.nome
+
+
+class PaisForm( forms.Form ):
+
+    class Meta:
+        model  = Pais
+        fields = ("nome")
+    
+    nome = forms.ModelChoiceField(
+        empty_label = "--- Selecione ---",
+        queryset = Pais.objects.all().order_by( 'nome' ),
+        widget = forms.Select( attrs = {"class" : "form-control"} )
+    )

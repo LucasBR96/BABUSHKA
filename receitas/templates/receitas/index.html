@@ -5,52 +5,46 @@
 
 {% block conteudo %}
     
-    <script src = "{% static 'js/checkbox.js' %}"></script>
     <div class = "row mb-2" style = "width: 100%" >
 
-        <div class= "col-3 text-danger mt-3 pl-4 pr-0" id = "check-b" >
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="Todos" onclick="updateModo( true )" checked>
-                <label class="form-check-label" for="Todos">
-                Todos
-                </label> 
-            </div>
+        <div class= "col-md-2 col-12 text-danger mt-3 pl-4 pr-0" id = "check-b" >
 
-            {% for pais in filtro %}
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="{{pais.nome}}Check" onclick="updateModo( false )">
-                <label class="form-check-label" for="{{pais.nome}}Check">
-                {{pais.nome}}
-                </label>
-            </div>
-            {% endfor %}
+            <form id = "culFilter" action = "" method = "GET">
+                <select class = "form-select" aria-label>
+                    <option class = "pais_opt" value = "Todos">Todos</option>
+                    {% for pais in filtro %}
+                        <option class = "pais_opt" value="{{ pais.nome }}">{{ pais.nome }}</option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
 
-        <div class = "col-8">
+        <div class = "col-md-10 col-12">
 
+            <div class = "row">
             {% for receita in rec %}
-            <div class = "row my-2">
-                <div class = "card text-center border-primary" >
-                    <div class = "card-header text-danger" style = "background-color: rgb( 255 , 255 , 255 )">
-                        <h4>{{receita.nome}}</h4>
-                        <h5>{{receita.culinaria}}</h5>
+                <div class = "col-md-6 col-12 my-2">
+                    <div class = "card text-center border-primary" >
+                        <div class = "card-header text-danger" style = "background-color: rgb( 255 , 255 , 255 )">
+                            <h4>{{receita.nome}}</h4>
+                            <h5 class = "cul" >{{receita.culinaria}}</h5>
 
-                    </div>
-                    <div class = "card-body pb-0">
-                        <img src = "{%static 'images/receitas/' %}{{receita.thumb}}"
-                        style = "width: 520px">
-                        <p class = "text-justify-center mt-3">
-                            {{receita.desc}}
-                        </p>
-                    </div>
-                    <div class = "card-footer" style = "background-color: rgb( 255 , 255 , 255 )" >
-                        <button type = "button" 
-                        class = "btn"
-                        style = "color :rgb(0, 50, 160) ; border-color: rgb(0, 50, 160)">
-                            confira </button>
+                        </div>
+                        <div class = "card-body pb-0">
+                            <img src = "{%static 'images/receitas/' %}{{receita.thumb}}"
+                            style = "width: 100%">
+                            <p class = "text-justify-center mt-3">
+                                {{receita.desc}}
+                            </p>
+                        </div>
+                        <div class = "card-footer" style = "background-color: rgb( 255 , 255 , 255 )" >
+                            <button type = "button" 
+                            class = "btn"
+                            style = "color :rgb(0, 50, 160) ; border-color: rgb(0, 50, 160)">
+                                confira </button>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
 
         </div>

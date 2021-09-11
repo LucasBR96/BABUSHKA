@@ -25,7 +25,6 @@ class Pais( models.Model ):
 class PaisForm( forms.Form ):
 
     class Meta:
-        model  = Pais
         fields = ("nome")
     
     nome = forms.ModelChoiceField(

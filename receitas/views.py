@@ -8,7 +8,7 @@ from random import shuffle
 #------------------------------------------------------------------------------------
 # Auxiliares, não são views
 
-def set_cards( pais = '' ):
+def set_cards( request ):
 
     '''
         Carrega a informação nescessária para gerar os cards de receitas que serão usados
@@ -43,11 +43,12 @@ def set_cards( pais = '' ):
         item = card_ojt( nome , culinaria , thumb , desc )
         seq.append( item )
     
-    if pais != '': 
-        foo = lambda card: card.culinaria == pais
+    form = PaisForm( request.GET )
+    if form.is_valid():
+        foo = lambda card: card.culinaria == str( form.cleaned_data[ 'nome' ] )
         seq = list( filter( foo , seq ) )
-        print( seq )
-    
+
+    print( seq )
     return seq
 
 # Create your views here.
@@ -61,23 +62,6 @@ def start( request ):
 
     #---------------------------------------------------------
     # Cards de receitas
-    tag_dict[ 'rec' ] = set_cards()
-
-    return render( request , "receitas/index.html", tag_dict )
-
-
-def filtra_pais( request ):
-
-    tag_dict = {}
-    nome = request.path.split( "/" )[-2]
-    print( nome )
-
-    #---------------------------------------------------------
-    # Para o filtro, tbm usado para view de restaurante
-    tag_dict[ 'filtro' ] = listar_paises( )
-
-    #---------------------------------------------------------
-    # Cards de receitas
-    tag_dict[ 'rec' ] = set_cards(  pais = nome )
+    tag_dict[ 'rec' ] = set_cards( request )
 
     return render( request , "receitas/index.html", tag_dict )

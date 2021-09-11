@@ -6,5 +6,4 @@ app_name = 'receitas'
 
 urlpatterns = [
     path('', views.start , name = "start" ),
-    path('Armenia/' , views.filtra_pais , name = "filtra_pais")
 ]

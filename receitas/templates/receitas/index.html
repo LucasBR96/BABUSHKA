@@ -10,10 +10,12 @@
         <div class= "col-md-2 col-12 text-danger mt-3 pl-4 pr-0" id = "check-b" >
 
             <form id = "culFilter" action = "" method = "GET">
-                <select class = "form-select" aria-label>
-                    <option class = "pais_opt" value = "Todos">Todos</option>
+                <select class = "form-select" name ="nome" aria-label>
+                    <option class = "pais_opt" value = "">Todos</option>
                     {% for pais in filtro %}
-                        <option class = "pais_opt" value="{{ pais.nome }}">{{ pais.nome }}</option>
+                        <option class = "pais_opt" value="{{ pais.nome }}">
+                            {{ pais.nome }}
+                        </option>
                     {% endfor %}
                 </select>
             </form>
@@ -51,3 +53,26 @@
     </div>
     
 {% endblock %}
+
+{% block domready %};
+    
+    $( ".pais_opt" ).click( function(){
+
+        let top = document.getElementById( "culFilter" );
+
+        let data = $( top ).serializeArray();
+        console.log( data );
+
+        $( "h5.cul" ).each( function(){
+
+            let card = $( this ).parent().parent();
+            if ( $( this ).text() == data[0].value ){
+                card.show();
+            }else{
+                card.hide();
+            }
+
+        })
+    })
+
+{% endblock %};

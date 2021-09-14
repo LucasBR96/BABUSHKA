@@ -101,13 +101,8 @@
         <script src="{% static 'js/popper.js' %}"></script>
         <script src="{% static 'js/bootstrap.js' %}"></script>
         <script src="{% static 'js/script.js' %}"></script>
-        <script>
-            $(document).ready(function(){
-    
-                {% block domready %}
-    
-                {% endblock %}
-            });
-        </script>
+        {% block domready %}
+        {% endblock %}
+        
     </body>
 </html>

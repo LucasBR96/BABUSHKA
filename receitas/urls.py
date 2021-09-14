@@ -6,4 +6,5 @@ app_name = 'receitas'
 
 urlpatterns = [
     path('', views.start , name = "start" ),
+    path('rend_card' , views.rend_card, name = "rend_card" )
 ]

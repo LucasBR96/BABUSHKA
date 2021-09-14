@@ -9,11 +9,11 @@
 
         <div class= "col-md-2 col-12 text-danger mt-3 pl-4 pr-0" id = "check-b" >
 
-            <form id = "culFilter" action = "" method = "GET">
+            <form id = "culFilter" action = "rend_card" method = "GET">
                 <select class = "form-select" name ="nome" aria-label>
                     <option class = "pais_opt" value = "">Todos</option>
                     {% for pais in filtro %}
-                        <option class = "pais_opt" value="{{ pais.nome }}">
+                        <option class = "pais_opt" value="{{ pais.id }}">
                             {{ pais.nome }}
                         </option>
                     {% endfor %}
@@ -23,14 +23,15 @@
 
         <div class = "col-md-10 col-12">
 
-            <div class = "row">
+            
+            <div id = "cards-row" class = "row">
+            {% comment %}
             {% for receita in rec %}
                 <div class = "col-md-6 col-12 my-2">
                     <div class = "card text-center border-primary" >
                         <div class = "card-header text-danger" style = "background-color: rgb( 255 , 255 , 255 )">
                             <h4>{{receita.nome}}</h4>
                             <h5 class = "cul" >{{receita.culinaria}}</h5>
-
                         </div>
                         <div class = "card-body pb-0">
                             <img src = "{%static 'images/receitas/' %}{{receita.thumb}}"
@@ -48,14 +49,28 @@
                     </div>
                 </div>
             {% endfor %}
+            {% endcomment %}
 
         </div>
     </div>
     
 {% endblock %}
 
-{% block domready %};
+{% block domready %}
     
+<script>
+
+    $( document ).ready( function(){
+
+        let data = [ { name : "nome" , value : "" } ];
+        let url = "rend_card";
+
+        $.get( url , data , function( resposta ){
+            console.log( resposta );
+            renderCards( resposta );
+        })
+    })
+
     $( ".pais_opt" ).click( function(){
 
         let top = document.getElementById( "culFilter" );
@@ -63,16 +78,56 @@
         let data = $( top ).serializeArray();
         console.log( data );
 
-        $( "h5.cul" ).each( function(){
+        let url = $( top ).attr( "action" );
+        console.log( url )
 
-            let card = $( this ).parent().parent();
-            if ( $( this ).text() == data[0].value ){
-                card.show();
-            }else{
-                card.hide();
-            }
-
+        $.get( url , data, function( resposta ){
+            console.log( resposta );
+            renderCards( resposta );
         })
     })
+
+    renderCards = function( resposta ){
+
+        let s, nome , pais , foto , desc;
+        let row = $( "#cards-row" );
+        $( row ).empty();
+
+        for( item in resposta ){
+
+            s = resposta[ item ];
+            // console.log( s )
+
+            nome = s[ 0 ];
+            pais = s[ 1 ];
+            foto = s[ 2 ];
+            desc = s[ 3 ];
+
+            $( row ).append(`
+                <div class = "col-md-6 col-12 my-2">
+                    <div class = "card text-center border-primary h-100" >
+                        <div class = "card-header text-danger" style = "background-color: rgb( 255 , 255 , 255 )">
+                            <h4>${nome}</h4>
+                            <h5 class = "cul" >${pais}</h5>
+                        </div>
+                        <div class = "card-body pb-0">
+                            <img src = "../static/images/receitas/${foto}"
+                            style = "width: 100%; height: 70%">
+                            <p class = "text-justify-center mt-3">
+                                ${desc}
+                            </p>
+                        </div>
+                        <div class = "card-footer" style = "background-color: rgb( 255 , 255 , 255 )" >
+                            <button type = "button" 
+                            class = "btn"
+                            style = "color :rgb(0, 50, 160) ; border-color: rgb(0, 50, 160)">
+                                confira </button>
+                        </div>
+                    </div>
+                </div>
+            `)
+        }
+    }
+</script>
 
 {% endblock %};

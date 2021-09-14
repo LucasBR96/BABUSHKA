@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from paises.views import listar_paises
 from receitas.models import Receita , ReceitaCard
@@ -8,7 +9,7 @@ from random import shuffle
 #------------------------------------------------------------------------------------
 # Auxiliares, não são views
 
-def set_cards( request ):
+def rend_card( request ):
 
     '''
         Carrega a informação nescessária para gerar os cards de receitas que serão usados
@@ -44,12 +45,13 @@ def set_cards( request ):
         seq.append( item )
     
     form = PaisForm( request.GET )
+    print( form )
+
     if form.is_valid():
         foo = lambda card: card.culinaria == str( form.cleaned_data[ 'nome' ] )
         seq = list( filter( foo , seq ) )
 
-    print( seq )
-    return seq
+    return JsonResponse( { x.nome : x for x in seq } )
 
 # Create your views here.
 def start( request ):
@@ -59,9 +61,5 @@ def start( request ):
     #---------------------------------------------------------
     # Para o filtro, tbm usado para view de restaurante
     tag_dict[ 'filtro' ] = listar_paises()
-
-    #---------------------------------------------------------
-    # Cards de receitas
-    tag_dict[ 'rec' ] = set_cards( request )
 
     return render( request , "receitas/index.html", tag_dict )
